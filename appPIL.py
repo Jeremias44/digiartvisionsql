@@ -14,24 +14,7 @@ DATABASE_URL = 'postgres://digiartvisionsql_postrgressql_user:QbcjiMJNMV7nxMragK
 # Establece una conexión a la base de datos
 conn = psycopg2.connect(DATABASE_URL)
 
-'''
-def crear_tabla_datos():
-    # Abre un cursor para interactuar con la base de datos
-    cursor = conn.cursor()
-    # Define la consulta SQL para crear la tabla si no existe
-    create_table_query = """
-    CREATE TABLE IF NOT EXISTS datos (
-        vector REAL[],
-        etiqueta INTEGER
-    );
-    """
-    # Ejecuta la consulta para crear la tabla
-    cursor.execute(create_table_query)
-    # Confirma los cambios en la base de datos
-    conn.commit()
-    # Cierra el cursor
-    cursor.close()
-'''
+
 def guardar_data(vector, etiqueta):
     # Abre un cursor para interactuar con la base de datos
     cursor = conn.cursor()
