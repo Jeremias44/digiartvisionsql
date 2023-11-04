@@ -1,6 +1,4 @@
 # Entorno Virtual
 venvSQL/
-
-# Archivos ipynb
-PruebasApp.ipynb
-PruebasEntrenaModelo.ipynb
+# Variables de Entorno
+.env
