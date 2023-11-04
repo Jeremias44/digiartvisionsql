@@ -6,23 +6,13 @@ from PIL import Image
 import pandas as pd
 import numpy as np
 from streamlit_drawable_canvas import st_canvas
-
-# Intenta cargar el DataFrame desde el archivo CSV si existe
-try:
-    data = pd.read_csv('Streamlit/data')
-    # El archivo CSV existía, puedes trabajar con 'data' aquí.
-except FileNotFoundError:
-    # El archivo CSV no existe, crea un nuevo DataFrame
-    data = pd.DataFrame(columns=['Vectores', 'Etiqueta'])
-
+from pgadmin_connect_render import *
+   
 st.title('Modelo para reconocer números del 0 al 9 📚🚀💡👨‍💻')
 st.subheader('Este modelo se encuentra en proceso de entrenamiento 🏋️‍♂️ Podés jugar las veces que quieras y estarás ayudando a entrenarlo! 💪')
 st.write("## Para comenzar dibujá en el lienzo un número del 0 al 9")
 
 drawing = False
-
-
-
 # Crear una barra lateral para opciones
 drawing_mode = "freedraw"
 background_color="black"
@@ -39,7 +29,6 @@ model = st.sidebar.selectbox("Modelo", ("Streamlit/retrained_model.h5","Streamli
 
 # Carga el modelo desde el archivo .h5
 loaded_model = load_model(model)
-
 
 # Crea un lienzo en blanco
 canvas = st_canvas(
@@ -60,16 +49,12 @@ if st.checkbox('Iniciar Predicciones'):
     st.write('Dibujá y borrá las veces que quieras')
 
     # Escala la imagen a 28x28 píxeles
-    #scaled_image = cv2.resize(image, (28, 28))
     scaled_image = image.resize((28, 28))
 
-    # Convierte la imagen a escala de grises si no lo está
-    #if len(scaled_image.shape) > 2:
-        #scaled_image = cv2.cvtColor(scaled_image, cv2.COLOR_BGR2GRAY)
+    # Convierte la imagen a escala de grises
     scaled_image = scaled_image.convert('L')
 
-    # Asegúrate de que los valores de los píxeles estén en el rango [0, 255]
-    #scaled_image = cv2.normalize(scaled_image, None, 0, 255, cv2.NORM_MINMAX)
+    # Asegura que los valores de los píxeles estén en el rango [0, 255]
     scaled_image = np.array(scaled_image)
 
     # Agrega una dimensión de lote y cambia el formato de la imagen
@@ -81,7 +66,7 @@ if st.checkbox('Iniciar Predicciones'):
     # Realiza la predicción con el modelo
     predicted_number = loaded_model.predict(input_image)
 
-    # La predicción es un arreglo de probabilidades, puedes obtener el número predicho tomando el índice con mayor probabilidad
+    # La predicción es un arreglo de probabilidades, se puede obtener el número predicho tomando el índice con mayor probabilidad
     predicted_number = np.argmax(predicted_number)
 
     # Visualiza la imagen procesada
@@ -99,17 +84,14 @@ if st.checkbox('Iniciar Predicciones'):
     input_image_flat = input_image_flat.astype(np.float32)
 
     label = st.number_input("Verificá que la etiqueta sea la correcta antes de registrarla. En caso de que sea incorrecta, por favor corregila (0,9):", 0, 9, predicted_number)     
-    data2 = pd.DataFrame({"Vectores": [input_image_flat.tolist()], "Etiqueta": [label]})
-    st.write(data2)
+    vector = [input_image_flat.tolist()]
+    etiqueta = [label]
 
-    if st.button("Registrar Etiqueta"):
-        data = pd.concat([data, data2], ignore_index=True)
-        st.write('Gracias por ayudar a reentrenar el modelo')
-        st.write("## ¡Excelente trabajo! 🏅")
-        st.write('Si hacés click en la papelera podés hacer un nuevo dibujo y seguir entrenando al modelo 😃')
-        data = data.drop_duplicates(subset=["Vectores"])
-        # Guarda el DataFrame actualizado en un archivo CSV
-        data.to_csv('Streamlit/data', index=False)
-        data2 = None
+
+if st.button("Registrar Etiqueta"):
+    st.write('Gracias por ayudar a reentrenar el modelo')
+    st.write("## ¡Excelente trabajo! 🏅")
+    st.write('Si hacés click en la papelera podés hacer un nuevo dibujo y seguir entrenando al modelo 😃')
+    guardar_data(vector, etiqueta)
 
 
