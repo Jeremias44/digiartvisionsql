@@ -6,13 +6,14 @@ import pandas as pd
 import numpy as np
 from streamlit_drawable_canvas import st_canvas
 import psycopg2
+import os
+from dotenv import load_dotenv
 
 
 # Se obtiene la URL de la base de datos desde las variables de entorno
-#DATABASE_URL = 'postgres://digiartvisionsql_postrgressql_user:QbcjiMJNMV7nxMragK1Dxyyam2SMgvPn@dpg-cl36t99novjs73bcvcjg-a.oregon-postgres.render.com/digiartvisionsql_postrgressql'
-#DATABASE_URL = os.getenv(DATABASE_URL)
+DATABASE_URL = os.getenv(DATABASE_URL)
 # Establece una conexión a la base de datos
-conn = psycopg2.connect(DATABASE_URL)
+conn = psycopg2.connect('postgres://digiartvisionsql_postrgressql_user:QbcjiMJNMV7nxMragK1Dxyyam2SMgvPn@dpg-cl36t99novjs73bcvcjg-a.oregon-postgres.render.com/digiartvisionsql_postrgressql')
 
 def guardar_data(vector, etiqueta):
     # Abre un cursor para interactuar con la base de datos
