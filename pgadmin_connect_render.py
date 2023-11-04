@@ -42,7 +42,7 @@ def guardar_data(vector, etiqueta):
     # Crea una tupla con los datos a actualizar en la consulta
     data = (etiqueta, vector)
     # Ejecuta la consulta de actualización con los datos proporcionados
-    cursor.execute(update_query, data)
+    cursor.execute(insert_query, data)
     # Confirma los cambios en la base de datos
     conn.commit()
     # Cierra el cursor
