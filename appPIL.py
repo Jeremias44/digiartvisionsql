@@ -50,41 +50,31 @@ canvas = st_canvas(
 )
 
 if st.checkbox('Iniciar Predicciones'):
-    # Obtén la imagen dibujada en el lienzo
+    # Obtiene la imagen dibujada en el lienzo
     image = Image.fromarray(canvas.image_data.astype('uint8'))
     #image = canvas.image_data.astype(np.uint8)
     st.write('Dibujá y borrá las veces que quieras')
 
     # Escala la imagen a 28x28 píxeles
     scaled_image = image.resize((28, 28))
-
     # Convierte la imagen a escala de grises
     scaled_image = scaled_image.convert('L')
-
     # Asegura que los valores de los píxeles estén en el rango [0, 255]
     scaled_image = np.array(scaled_image)
-
     # Agrega una dimensión de lote y cambia el formato de la imagen
     input_image = scaled_image.reshape(1, 28, 28, 1)  # 1 es el tamaño del lote, 28x28x1 es la forma de entrada
-
     # Normaliza la imagen si es necesario
     input_image = input_image / 255.0  # Normaliza los valores al rango [0, 1]
-
     # Realiza la predicción con el modelo
     predicted_number = loaded_model.predict(input_image)
-
     # La predicción es un arreglo de probabilidades, se puede obtener el número predicho tomando el índice con mayor probabilidad
     predicted_number = np.argmax(predicted_number)
-
     # Visualiza la imagen procesada
     st.image(scaled_image, caption='Imagen procesada', width=140)
-
     # Ahora, `predicted_number` contiene el número predicho por el modelo
     st.subheader(f'Valor detectado: {predicted_number}')
-
     # Aplana la imagen a un arreglo unidimensional
     input_image_flat = input_image.reshape(-1)
-
     # Convierte el arreglo a float32
     input_image_flat = input_image_flat.astype(np.float32)
 
@@ -98,5 +88,3 @@ if st.button("Registrar Etiqueta"):
     st.write("## ¡Excelente trabajo! 🏅")
     st.write('Si hacés click en la papelera podés hacer un nuevo dibujo y seguir entrenando al modelo 😃')
     guardar_data(vector, etiqueta)
-
-
