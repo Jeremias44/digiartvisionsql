@@ -2,4 +2,4 @@ streamlit
 tensorflow
 opencv-python
 streamlit-drawable-canvas
-psycopg2
+psycopg2-binary
