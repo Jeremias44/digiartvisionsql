@@ -70,8 +70,8 @@ if st.checkbox('Iniciar Predicciones'):
     input_image_flat = input_image_flat.astype(np.float32)
 
     label = st.number_input("Verificá que la etiqueta sea la correcta antes de registrarla. En caso de que sea incorrecta, por favor corregila (0,9):", 0, 9, predicted_number)     
-    vector = [input_image_flat.tolist()]
-    etiqueta = [label]
+    vector = input_image_flat.tolist()
+    etiqueta = label
 
 
 if st.button("Registrar Etiqueta"):

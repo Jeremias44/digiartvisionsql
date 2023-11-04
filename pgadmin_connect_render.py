@@ -38,8 +38,7 @@ def guardar_data(vector, etiqueta):
     # Abre un cursor para interactuar con la base de datos
     cursor = conn.cursor()
     # Define la consulta de actualización SQL para asignar la calificación
-    #update_query = "UPDATE datos SET etiqueta = %s WHERE vector = %s"
-    update_query = "UPDATE datos SET etiqueta = ARRAY[%s] WHERE vector = ARRAY[%s]"
+    update_query = "UPDATE datos SET etiqueta = %s WHERE vector = %s"
     # Crea una tupla con los datos a actualizar en la consulta
     data = (etiqueta, vector)
     # Ejecuta la consulta de actualización con los datos proporcionados
