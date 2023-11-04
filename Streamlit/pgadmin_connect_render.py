@@ -16,27 +16,12 @@ def init_connection():
 conn = init_connection()
 
 
-def elimina_tabla_predicciones():
+def crear_tabla_datos():
     # Abre un cursor para interactuar con la base de datos
     cursor = conn.cursor()
     # Define la consulta SQL para crear la tabla si no existe
     create_table_query = """
-    DROP TABLE IF EXISTS predicciones;
-    """
-    # Ejecuta la consulta para crear la tabla
-    cursor.execute(create_table_query)
-    # Confirma los cambios en la base de datos
-    conn.commit()
-    # Cierra el cursor
-    cursor.close()
-
-
-def crear_tabla_predicciones():
-    # Abre un cursor para interactuar con la base de datos
-    cursor = conn.cursor()
-    # Define la consulta SQL para crear la tabla si no existe
-    create_table_query = """
-    CREATE TABLE IF NOT EXISTS predicciones (
+    CREATE TABLE IF NOT EXISTS datos (
         vector REAL[],
         etiqueta INTEGER
     );
@@ -53,7 +38,7 @@ def guardar_data(vector, etiqueta):
     # Abre un cursor para interactuar con la base de datos
     cursor = conn.cursor()
     # Define la consulta de actualización SQL para asignar la calificación
-    update_query = "UPDATE predicciones SET etiqueta = %s WHERE vector = %s"
+    update_query = "UPDATE datos SET etiqueta = %s WHERE vector = %s"
     # Crea una tupla con los datos a actualizar en la consulta
     data = (etiqueta, vector)
     # Ejecuta la consulta de actualización con los datos proporcionados
