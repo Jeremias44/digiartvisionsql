@@ -40,7 +40,7 @@ def guardar_data(vector, etiqueta):
     # Define la consulta de actualización SQL para asignar la calificación
     insert_query = "INSERT INTO datos (vector, etiqueta) VALUES (ARRAY[%s], %s)"
     # Crea una tupla con los datos a actualizar en la consulta
-    data = (etiqueta, vector)
+    data = (vector, etiqueta)
     # Ejecuta la consulta de actualización con los datos proporcionados
     cursor.execute(insert_query, data)
     # Confirma los cambios en la base de datos
