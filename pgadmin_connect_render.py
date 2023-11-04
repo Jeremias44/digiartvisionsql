@@ -7,7 +7,7 @@ DATABASE_URL = 'postgres://digiartvisionsql_postrgressql_user:QbcjiMJNMV7nxMragK
 #DATABASE_URL = os.getenv(DATABASE_URL)
 
 # Inicializa la conexión a la base de datos
-#@st.cache_resource
+@st.cache_resource
 def init_connection():
     # Crea una conexión utilizando la URL de la base de datos
     return psycopg2.connect(DATABASE_URL)
