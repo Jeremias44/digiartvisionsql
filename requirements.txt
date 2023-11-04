@@ -1,5 +1,6 @@
+python-dotenv
 streamlit
 tensorflow
 streamlit-drawable-canvas
 psycopg2-binary
-python-dotenv
+
