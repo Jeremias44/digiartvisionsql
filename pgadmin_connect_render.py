@@ -6,14 +6,8 @@ import psycopg2
 DATABASE_URL = 'postgres://digiartvisionsql_postrgressql_user:QbcjiMJNMV7nxMragK1Dxyyam2SMgvPn@dpg-cl36t99novjs73bcvcjg-a.oregon-postgres.render.com/digiartvisionsql_postrgressql'
 #DATABASE_URL = os.getenv(DATABASE_URL)
 
-# Inicializa la conexión a la base de datos
-@st.cache_resource
-def init_connection():
-    # Crea una conexión utilizando la URL de la base de datos
-    return psycopg2.connect(DATABASE_URL)
-
 # Establece una conexión a la base de datos
-conn = init_connection()
+conn = psycopg2.connect(DATABASE_URL)
 
 '''
 def crear_tabla_datos():
