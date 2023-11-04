@@ -84,7 +84,7 @@ if st.checkbox('Iniciar Predicciones'):
     etiqueta = label
 
 
-if st.button("Registrar Etiqueta"):
+
     st.write('Gracias por ayudar a reentrenar el modelo')
     st.write("## ¡Excelente trabajo! 🏅")
     st.write('Si hacés click en la papelera podés hacer un nuevo dibujo y seguir entrenando al modelo 😃')
