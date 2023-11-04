@@ -15,7 +15,7 @@ def init_connection():
 # Establece una conexión a la base de datos
 conn = init_connection()
 
-
+'''
 def crear_tabla_datos():
     # Abre un cursor para interactuar con la base de datos
     cursor = conn.cursor()
@@ -32,7 +32,7 @@ def crear_tabla_datos():
     conn.commit()
     # Cierra el cursor
     cursor.close()
-
+'''
 
 def guardar_data(vector, etiqueta):
     # Abre un cursor para interactuar con la base de datos
