@@ -7,7 +7,7 @@ import numpy as np
 from streamlit_drawable_canvas import st_canvas
 from pgadmin_connect_render import *
 
-crear_tabla_predicciones()
+elimina_tabla_predicciones()
    
 st.title('Modelo para reconocer números del 0 al 9 📚🚀💡👨‍💻')
 st.subheader('Este modelo se encuentra en proceso de entrenamiento 🏋️‍♂️ Podés jugar las veces que quieras y estarás ayudando a entrenarlo! 💪')

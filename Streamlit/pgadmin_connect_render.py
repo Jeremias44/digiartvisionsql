@@ -16,6 +16,20 @@ def init_connection():
 conn = init_connection()
 
 
+def elimina_tabla_predicciones():
+    # Abre un cursor para interactuar con la base de datos
+    cursor = conn.cursor()
+    # Define la consulta SQL para crear la tabla si no existe
+    create_table_query = """
+    DROP TABLE IF EXISTS predicciones;
+    """
+    # Ejecuta la consulta para crear la tabla
+    cursor.execute(create_table_query)
+    # Confirma los cambios en la base de datos
+    conn.commit()
+    # Cierra el cursor
+    cursor.close()
+
 
 def crear_tabla_predicciones():
     # Abre un cursor para interactuar con la base de datos
@@ -23,8 +37,8 @@ def crear_tabla_predicciones():
     # Define la consulta SQL para crear la tabla si no existe
     create_table_query = """
     CREATE TABLE IF NOT EXISTS predicciones (
-        vector text,
-        etiqueta text
+        vector REAL[],
+        etiqueta INTEGER
     );
     """
     # Ejecuta la consulta para crear la tabla
