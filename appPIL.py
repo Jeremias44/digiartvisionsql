@@ -44,7 +44,7 @@ st.sidebar.title("Modelos a Utilizar")
 # Obtener la ruta absoluta del directorio actual
 current_directory = os.path.dirname(__file__)
 # Construir la ruta completa a la imagen 3
-image_path = os.path.join(current_directory, 'media', 'modelos.png')
+image_path = os.path.join(current_directory, 'media', 'modelos2.png')
 # Cargar la imagen y mostrarla en la columna lateral
 imagen = Image.open(image_path)
 st.sidebar.image(imagen, caption='', use_column_width=True)
