@@ -40,9 +40,19 @@ stroke_width = st.sidebar.selectbox("Ancho del trazo", (20,30,40), index=1)
 
 # Modelo a Utilizar
 st.sidebar.title("Modelos a Utilizar")
+
+# Obtener la ruta absoluta del directorio actual
+current_directory = os.path.dirname(__file__)
+# Construir la ruta completa a la imagen 3
+image_path = os.path.join(current_directory, 'media', 'modelos.png')
+# Cargar la imagen y mostrarla en la columna lateral
+imagen = Image.open(image_path)
+st.sidebar.image(imagen, caption='', use_column_width=True)
+"""
 st.sidebar.info('model_retrained.h5 se entrena únicamente con los dibujos realizados por los usuarios de esta app')
 st.sidebar.info('model_mnist.h5 está preentrenado con un dataset muy utilizado llamado MNIST')
 st.sidebar.info('model_mix.h5 se entrena con los datos provenientes de ambas fuentes')
+"""
 model = st.sidebar.selectbox("Modelo", ("model_retrained.h5","model_mnist.h5","model_mix.h5"), index=0)
 
 st.sidebar.markdown("### Contacta con el autor del sitio")
