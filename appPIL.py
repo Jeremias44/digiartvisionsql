@@ -35,10 +35,8 @@ st.title('Modelo para reconocer números del 0 al 9 📚🚀💡👨‍💻')
 st.subheader('Este modelo se encuentra en proceso de entrenamiento 🏋️‍♂️ Podés jugar las veces que quieras y estarás ayudando a entrenarlo! 💪')
 st.write("## Para comenzar dibujá en el lienzo un número del 0 al 9")
 
-drawing = False
-
 st.sidebar.title("Opciones de Dibujo")
-background_color = st.sidebar.selectbox("Color del fondo", ("black","blue"), index=0)
+background_color = st.sidebar.selectbox("Color del fondo", ("black","blue"), index=1)
 stroke_width = st.sidebar.selectbox("Ancho del trazo", (20,30,40), index=1)
 st.sidebar.title("Modelo a Utilizar")
 st.sidebar.markdown('model_retrained.h5 es un modelo que se entrena únicamente con los dibujos realizados por los usuarios de esta app')
