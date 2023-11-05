@@ -43,6 +43,11 @@ st.sidebar.markdown('model_mnist.h5 es un modelo preentrenado con un dataset muy
 st.sidebar.markdown('model_mix.h5 se entrena con los datos provenientes de ambas fuentes')
 model = st.sidebar.selectbox("Modelo", ("model_retrained.h5","model_mnist.h5","model_mix.h5"), index=0)
 
+st.sidebar.markdown("### Contacta con el autor del sitio")
+st.sidebar.markdown("[Jeremías Pombo en LinkedIn](https://www.linkedin.com/in/jeremiaspombo/)")
+st.sidebar.markdown("### Visita el repositorio del proyecto")
+st.sidebar.markdown("[Repositorio de GitHub](https://github.com/Jeremias44/digiartvisionsql)")
+
 # Carga el modelo desde el archivo .h5
 loaded_model = load_model(model)
 
