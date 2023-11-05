@@ -37,10 +37,17 @@ st.write("## Para comenzar dibujá en el lienzo un número del 0 al 9")
 st.sidebar.title("Opciones de Dibujo")
 background_color = st.sidebar.selectbox("Color del fondo", ("black","blue"), index=0)
 stroke_width = st.sidebar.selectbox("Ancho del trazo", (20,30,40), index=1)
+
+# Modelo a Utilizar
 st.sidebar.title("Modelo a Utilizar")
-st.sidebar.markdown('model_retrained.h5 es un modelo que se entrena únicamente con los dibujos realizados por los usuarios de esta app')
-st.sidebar.markdown('model_mnist.h5 es un modelo preentrenado con un dataset muy utilizado llamado MNIST')
-st.sidebar.markdown('model_mix.h5 se entrena con los datos provenientes de ambas fuentes')
+# Agrega un ícono de información junto a la palabra "Modelo"
+st.sidebar.info("Haga clic aquí para obtener información sobre los modelos")
+# Muestra la información sobre los modelos cuando se hace clic en el ícono de información
+if st.sidebar.checkbox("Mostrar información del modelo"):
+    st.sidebar.markdown('model_retrained.h5 es un modelo que se entrena únicamente con los dibujos realizados por los usuarios de esta app')
+    st.sidebar.markdown('model_mnist.h5 es un modelo preentrenado con un dataset muy utilizado llamado MNIST')
+    st.sidebar.markdown('model_mix.h5 se entrena con los datos provenientes de ambas fuentes')
+    
 model = st.sidebar.selectbox("Modelo", ("model_retrained.h5","model_mnist.h5","model_mix.h5"), index=0)
 
 st.sidebar.markdown("### Contacta con el autor del sitio")
