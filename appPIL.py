@@ -40,8 +40,8 @@ stroke_width = st.sidebar.selectbox("Ancho del trazo", (20,30,40), index=1)
 
 # Modelo a Utilizar
 st.sidebar.title("Modelos a Utilizar")
-st.sidebar.info('model_retrained.h5 es un modelo que se entrena únicamente con los dibujos realizados por los usuarios de esta app')
-st.sidebar.info('model_mnist.h5 es un modelo preentrenado con un dataset muy utilizado llamado MNIST')
+st.sidebar.info('model_retrained.h5 se entrena únicamente con los dibujos realizados por los usuarios de esta app')
+st.sidebar.info('model_mnist.h5 está preentrenado con un dataset muy utilizado llamado MNIST')
 st.sidebar.info('model_mix.h5 se entrena con los datos provenientes de ambas fuentes')
 model = st.sidebar.selectbox("Modelo", ("model_retrained.h5","model_mnist.h5","model_mix.h5"), index=0)
 
@@ -101,5 +101,5 @@ if st.checkbox('Iniciar Predicciones'):
 if st.button('Guardar Etiqueta'):
     st.write('Gracias por ayudar a reentrenar el modelo')
     st.write("## ¡Excelente trabajo! 🏅")
-    st.write('Si hacés click en la papelera podés dibujar nuevamente un número y seguir entrenando el modelo 😃')
+    st.write('Si hacés click en la papelera podés dibujar nuevamente y seguir entrenando el modelo 😃')
     save_data(vector, label)
