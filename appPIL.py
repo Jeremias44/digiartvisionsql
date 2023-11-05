@@ -88,13 +88,13 @@ if st.checkbox('Iniciar Predicciones'):
     # Convierte el arreglo a float32
     input_image_flat = input_image_flat.astype(np.float32)
 
-    label = st.number_input("Verificá que la etiqueta sea la correcta antes de registrarla. En caso de que sea incorrecta, por favor corregila (0,9):", 0, 9, predicted_number)     
+    label = st.number_input("Verificá que la etiqueta sea la correcta antes de guardarla. En caso de que sea incorrecta, por favor corregila (0,9):", 0, 9, predicted_number)     
     vector = input_image_flat.tolist()
     etiqueta = label
 
 
-if st.button('Registrar Etiqueta'):
+if st.button('Guardar Etiqueta'):
     st.write('Gracias por ayudar a reentrenar el modelo')
     st.write("## ¡Excelente trabajo! 🏅")
-    st.write('Si hacés click en la papelera podés dibujar nuevamente un número y seguir entrenando al modelo 😃')
+    st.write('Si hacés click en la papelera podés dibujar nuevamente un número y seguir entrenando el modelo 😃')
     guardar_data(vector, etiqueta)
