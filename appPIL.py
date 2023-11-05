@@ -36,14 +36,25 @@ st.subheader('Este modelo se encuentra en proceso de entrenamiento 🏋️‍♂
 st.write("## Para comenzar dibujá en el lienzo un número del 0 al 9")
 
 drawing = False
-loaded_model = load_model("retrained_model.h5")
+
+st.sidebar.title("Opciones de Dibujo")
+background_color = st.sidebar.selectbox("Color del fondo", ("black","blue"), index=0)
+stroke_width = st.sidebar.selectbox("Ancho del trazo", (20,30,40), index=1)
+st.sidebar.title("Modelo a Utilizar")
+st.sidebar.markdown('model_retrained.h5 es un modelo que se entrena únicamente con los dibujos realizados por los usuarios de esta app')
+st.sidebar.markdown('model_mnist.h5 es un modelo preentrenado con un dataset muy utilizado llamado MNIST')
+st.sidebar.markdown('model_mix.h5 se entrena con los datos provenientes de ambas fuentes')
+model = st.sidebar.selectbox("Modelo", ("model_retrained.h5","model_mnist.h5","model_mix.h5"), index=0)
+
+# Carga el modelo desde el archivo .h5
+loaded_model = load_model(model)
 
 # Crea un lienzo en blanco
 canvas = st_canvas(
     fill_color="black",  # Color de relleno de las formas
-    stroke_width=30,  # Ancho del trazo
+    stroke_width=stroke_width,  # Ancho del trazo
     stroke_color="white",  # Color del trazo
-    background_color="black",  # Color de fondo del canvas
+    background_color=background_color,  # Color de fondo del canvas
     width=280,  # Ancho del lienzo
     height=280,  # Alto del lienzo
     drawing_mode="freedraw",  # Modo de dibujo
