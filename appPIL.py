@@ -2,7 +2,6 @@ import streamlit as st
 from tensorflow import keras
 from keras.models import load_model
 from PIL import Image
-import pandas as pd
 import numpy as np
 from streamlit_drawable_canvas import st_canvas
 import psycopg2
@@ -16,13 +15,13 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 # Establece una conexión a la base de datos
 conn = psycopg2.connect(DATABASE_URL)
 
-def guardar_data(vector, etiqueta):
+def save_data(vector, label):
     # Abre un cursor para interactuar con la base de datos
     cursor = conn.cursor()
     # Define la consulta de actualización SQL para asignar la calificación
     insert_query = "INSERT INTO datos (vector, etiqueta) VALUES (ARRAY[%s], %s)"
     # Crea una tupla con los datos a actualizar en la consulta
-    data = (vector, etiqueta)
+    data = (vector, label)
     # Ejecuta la consulta de actualización con los datos proporcionados
     cursor.execute(insert_query, data)
     # Confirma los cambios en la base de datos
@@ -36,7 +35,7 @@ st.subheader('Este modelo se encuentra en proceso de entrenamiento 🏋️‍♂
 st.write("## Para comenzar dibujá en el lienzo un número del 0 al 9")
 
 st.sidebar.title("Opciones de Dibujo")
-background_color = st.sidebar.selectbox("Color del fondo", ("black","blue"), index=1)
+background_color = st.sidebar.selectbox("Color del fondo", ("black","blue"), index=0)
 stroke_width = st.sidebar.selectbox("Ancho del trazo", (20,30,40), index=1)
 st.sidebar.title("Modelo a Utilizar")
 st.sidebar.markdown('model_retrained.h5 es un modelo que se entrena únicamente con los dibujos realizados por los usuarios de esta app')
@@ -90,11 +89,10 @@ if st.checkbox('Iniciar Predicciones'):
 
     label = st.number_input("Verificá que la etiqueta sea la correcta antes de guardarla. En caso de que sea incorrecta, por favor corregila (0,9):", 0, 9, predicted_number)     
     vector = input_image_flat.tolist()
-    etiqueta = label
 
 
 if st.button('Guardar Etiqueta'):
     st.write('Gracias por ayudar a reentrenar el modelo')
     st.write("## ¡Excelente trabajo! 🏅")
     st.write('Si hacés click en la papelera podés dibujar nuevamente un número y seguir entrenando el modelo 😃')
-    guardar_data(vector, etiqueta)
+    save_data(vector, label)
