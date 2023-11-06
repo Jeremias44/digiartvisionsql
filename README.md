@@ -325,7 +325,10 @@ retrained_model.save("model_retrained.h5")
 
 - **retrained_model.save("model_retrained.h5")**: # Una vez que se haya terminado el entrenamiento, se guarda el modelo
 
-El archivo `retrain.ipynb` continúa de manera similar con el entrenamiento de los restantes modelos `mix_model.h5` y `mnist_model.h5`
+El archivo `retrain.ipynb` continúa de manera similar con el entrenamiento de los restantes modelos `mix_model.h5` y `mnist_model.h5`. Luego pasa a la sección de Comparativa y Evaluación de Modelos.
+
+
+
 
 
 ## Carpeta Media
