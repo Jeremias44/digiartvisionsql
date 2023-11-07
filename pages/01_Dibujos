@@ -1,0 +1,4 @@
+import streamlit as st
+
+st.title("Dibujos y etiquetas")
+st.write("Elija el valor de etiqueta que desea observar")

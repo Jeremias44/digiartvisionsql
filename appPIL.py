@@ -7,7 +7,7 @@ from streamlit_drawable_canvas import st_canvas
 import psycopg2
 import os
 from dotenv import load_dotenv
-from utils import new_page, save_data
+from utils import save_data
 
 def main():
     # Se obtiene la URL de la base de datos desde las variables de entorno
@@ -32,9 +32,9 @@ def main():
     st.sidebar.image(imagen, caption='', use_column_width=True)
     model = st.sidebar.selectbox("Modelo a Utilizar", ("model_retrained.h5","model_mnist.h5","model_mix.h5"), index=0)
 
-    st.sidebar.markdown("### Contacta con el autor del sitio")
+    st.sidebar.markdown("### Contactá con el autor del sitio")
     st.sidebar.markdown("[Jeremías Pombo en LinkedIn](https://www.linkedin.com/in/jeremiaspombo/)")
-    st.sidebar.markdown("### Visita el repositorio del proyecto")
+    st.sidebar.markdown("### Visitá el repositorio del proyecto")
     st.sidebar.markdown("[Repositorio de GitHub](https://github.com/Jeremias44/digiartvisionsql)")
     # Se carga el modelo desde el archivo .h5
     loaded_model = load_model(model)

@@ -1,9 +1,5 @@
 import streamlit as st
 
-def new_page():
-    st.title("Nueva Página")
-    st.write("Este es el contenido de la nueva página.")
-
 def save_data(vector, label):
     # Se abre un cursor para interactuar con la base de datos
     cursor = conn.cursor()
