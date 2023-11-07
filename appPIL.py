@@ -111,7 +111,7 @@ if seleccion == "Ver Dibujos":
         image = Image.fromarray(vector)
         st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
 
-        if st.button(f"Eliminar Dibujo {row['id']}"):
+        if st.checkbox(f"Eliminar Dibujo {row['id']}"):
             if st.button("Confirmar eliminación"):
                 cursor = conn.cursor()
                 id_to_delete = row['id']
