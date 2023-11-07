@@ -111,41 +111,48 @@ if seleccion == "Ver Dibujos":
     st.sidebar.markdown(f"### Cantidad de Dibujos Registrados en la Base de Datos: {len(df)}")
     next_power_of_10 = 10 ** len(str(len(df)))
     st.sidebar.markdown(f"# Lleguemos a los {next_power_of_10} Registros!")
+    st.sidebar.markdown(f"### En esta página podrás contribuir eliminando aquellos dibujos que considerás que fueron cargados con la etiqueta incorrecta, aquellos dibujos que fueron subidos sin información, o aquellos dibujos en los que el ojo humano no puede precisar de qué número se trata")
+    etiqueta = st.sidebar.number_input('Para comenzar, ¿Cuál es el número que deseás verificar?:', 0, 9)
+    limite = st.sidebar.selectbox("¿Cuántos dibujos deseás verificar?", (10,50,'todos'), index=0)
 
-    st.title("Dibujos almacenados en la base de datos")
-    # Recorrer el DataFrame y mostrar los dibujos
-    etiqueta = st.number_input('¿Qué valores de etiqueta deseás verificar?:', 0, 9)
-    contador = 0
-    limite = 10
+
+    df = df[df['etiqueta'] == etiqueta ]
+    if limite != 'todos':
+        df = df.tail(limite)
+
+
+
+    st.subheader("Dibujos almacenados en la base de datos")
+    
+
     for index, row in df.iterrows():
-        while contador < limite:
-            if row['etiqueta'] == etiqueta:
-                contador += 1
-                st.write(f"Dibujo {index + 1}:")            
-                # Obtener el arreglo de vectores de la columna "vector"
-                vector = np.array(row['vector'])           
-                # Deshacer la normalización (multiplicar por 255)
-                vector = vector * 255            
-                # Cambiar la forma del arreglo a 28x28 píxeles
-                vector = vector.reshape(28, 28).astype('uint8')   
-                # Crear una imagen a partir del arreglo
-                image = Image.fromarray(vector)
-                # Mostrar la imagen en Streamlit
-                st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
+        if row['etiqueta'] == etiqueta:
+            contador += 1
+            st.write(f"Dibujo {index + 1}:")            
+            # Obtener el arreglo de vectores de la columna "vector"
+            vector = np.array(row['vector'])           
+            # Deshacer la normalización (multiplicar por 255)
+            vector = vector * 255            
+            # Cambiar la forma del arreglo a 28x28 píxeles
+            vector = vector.reshape(28, 28).astype('uint8')   
+            # Crear una imagen a partir del arreglo
+            image = Image.fromarray(vector)
+            # Mostrar la imagen en Streamlit
+            st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
 
-                # Agregar una opción para eliminar el dibujo
-                if st.button(f"Eliminar Dibujo {index + 1}"):
-                    # Conectarse nuevamente a la base de datos
-                    conn = psycopg2.connect(DATABASE_URL)
-                    cursor = conn.cursor()
-                    # Obtener el ID de la fila actual en el DataFrame
-                    id_to_delete = row['id']
-                    # Definir la consulta SQL para eliminar el registro por el vector
-                    delete_query = "DELETE FROM datos WHERE id = %s"
-                    # Ejecutar la consulta SQL con la cadena del vector
-                    cursor.execute(delete_query, (id_to_delete,)) #aquí debería poner el id exttraído del df
-                    # Confirmar los cambios en la base de datos
-                    conn.commit()
-                    # Cerrar el cursor y la conexión
-                    cursor.close()
-                    st.write(f"Dibujo {index + 1} eliminado de la base de datos.")
+            # Agregar una opción para eliminar el dibujo
+            if st.button(f"Eliminar Dibujo {index + 1}"):
+                # Conectarse nuevamente a la base de datos
+                conn = psycopg2.connect(DATABASE_URL)
+                cursor = conn.cursor()
+                # Obtener el ID de la fila actual en el DataFrame
+                id_to_delete = row['id']
+                # Definir la consulta SQL para eliminar el registro por el vector
+                delete_query = "DELETE FROM datos WHERE id = %s"
+                # Ejecutar la consulta SQL con la cadena del vector
+                cursor.execute(delete_query, (id_to_delete,)) #aquí debería poner el id exttraído del df
+                # Confirmar los cambios en la base de datos
+                conn.commit()
+                # Cerrar el cursor y la conexión
+                cursor.close()
+                st.write(f"Dibujo {index + 1} eliminado de la base de datos.")
