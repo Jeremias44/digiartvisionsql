@@ -146,7 +146,7 @@ if seleccion == "Ver Dibujos":
                 cursor = conn.cursor()
 
                 # Define la consulta SQL para eliminar el registro por el vector
-                delete_query = "DELETE FROM datos WHERE vector = %s"
+                delete_query = "DELETE FROM datos WHERE vector = %s::int[]"
 
                 # Ejecuta la consulta SQL con la cadena del vector
                 cursor.execute(delete_query, (vector_str,))
