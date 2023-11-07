@@ -114,24 +114,25 @@ if seleccion == "Ver Dibujos":
     st.title("Dibujos almacenados en la base de datos")
 
     # Recorrer el DataFrame y mostrar los dibujos
-    # Recorrer el DataFrame y mostrar los dibujos
+    etiqueta = st.number_input('¿Qué valores de etiqueta quiere verificar?:', 0, 9)
     for index, row in df.iterrows():
-        st.write(f"Dibujo {index + 1}:")
-        
-        # Obtener el arreglo de vectores de la columna "vector"
-        vector = np.array(row['vector'])
-        
-        # Deshacer la normalización (multiplicar por 255)
-        vector = vector * 255
-        
-        # Cambiar la forma del arreglo a 28x28 píxeles
-        vector = vector.reshape(28, 28).astype('uint8')
-        
-        # Crear una imagen a partir del arreglo
-        image = Image.fromarray(vector)
-        
-        # Mostrar la imagen en Streamlit
-        st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
+        if row['etiqueta'] == etiqueta:
+            st.write(f"Dibujo {index + 1}:")
+            
+            # Obtener el arreglo de vectores de la columna "vector"
+            vector = np.array(row['vector'])
+            
+            # Deshacer la normalización (multiplicar por 255)
+            vector = vector * 255
+            
+            # Cambiar la forma del arreglo a 28x28 píxeles
+            vector = vector.reshape(28, 28).astype('uint8')
+            
+            # Crear una imagen a partir del arreglo
+            image = Image.fromarray(vector)
+            
+            # Mostrar la imagen en Streamlit
+            st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
 
 # Cierra la conexión a la base de datos cuando hayas terminado
 conn.close()
