@@ -29,7 +29,8 @@ def save_data(vector, etiqueta):
     # Se cierra el cursor
     cursor.close()
 
-seleccion = st.sidebar.selectbox("Inicio", "Ver Dibujos")
+st.sidebar.title("Navegación")
+seleccion = st.sidebar.selectbox("Ir a la página:", ("Inicio", "Ver Dibujos"))
 
 if seleccion == "Inicio":
     st.title('Modelo para reconocer números del 0 al 9 📚🚀💡👨‍💻')
