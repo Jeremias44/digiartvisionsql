@@ -109,4 +109,18 @@ if seleccion == "Ver Dibujos":
     query = "SELECT * FROM datos"
     # Utilizar pandas para ejecutar la consulta y cargar los resultados en un DataFrame
     df = pd.read_sql_query(query, conn)
-    st.write(len(df))
+
+    st.title("Dibujos almacenados en la base de datos")
+
+    # Recorrer el DataFrame y mostrar los dibujos
+    for index, row in df.iterrows():
+        st.write(f"Dibujo {index + 1}:")
+        
+        # Obtener el arreglo de vectores de la columna "vector"
+        vector = np.array(row['vector'])
+        
+        # Crear una imagen a partir del arreglo de vectores
+        image = Image.fromarray(vector.reshape(28, 28).astype('uint8'))
+        
+        # Mostrar la imagen en Streamlit
+        st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
