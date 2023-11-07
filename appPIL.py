@@ -112,12 +112,15 @@ if seleccion == "Ver Dibujos":
         st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
 
         if st.button(f"Eliminar Dibujo {row['id']}"):
-            confirm = st.checkbox("¿Confirma que desea eliminar el dibujo? Esta acción no tiene retorno")
-            if confirm:
-                cursor = conn.cursor()
-                id_to_delete = row['id']
-                delete_query = "DELETE FROM datos WHERE id = %s"
-                cursor.execute(delete_query, (id_to_delete,))
-                conn.commit()
-                cursor.close()
-                st.write(f"Dibujo {row['id']} eliminado de la base de datos.")
+            with st.beta_expander("¿Está seguro de que desea eliminar el dibujo? Este proceso no tiene retorno"):
+                confirm = st.button("Confirmar eliminación")
+                if confirm:
+                    cursor = conn.cursor()
+                    id_to_delete = row['id']
+                    delete_query = "DELETE FROM datos WHERE id = %s"
+                    cursor.execute(delete_query, (id_to_delete,))
+                    conn.commit()
+                    cursor.close()
+                    st.write(f"Dibujo {row['id']} eliminado de la base de datos.")
+                else:
+                    st.write("Eliminación cancelada")
