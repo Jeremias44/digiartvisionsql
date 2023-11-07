@@ -103,8 +103,19 @@ if seleccion == "Inicio":
         st.write("## ¡Excelente trabajo! 🏅")
         st.write('Si hacés click en la papelera podés dibujar nuevamente y seguir entrenando el modelo 😃')
         save_data(vector, etiqueta)
+    
+if seleccion == "Ver Dibujos":
+    conn = psycopg2.connect(DATABASE_URL)
+    # Definir la consulta SQL para seleccionar todos los datos de la tabla "datos"
+    query = "SELECT * FROM datos"
+    # Utilizar pandas para ejecutar la consulta y cargar los resultados en un DataFrame
+    df = pd.read_sql_query(query, conn)
+    st.sidebar.markdown("### Cantidad de Dibujos Registrados en la Base de Datos:")
+    st.sidebar.markdown(f"# {len(df)}")
+    next_power_of_10 = 10 ** (len(str(len(df))) - 1)
+    st.sidebar.markdown(f"# Lleguemos a los {next_power_of_10} Registros!")
 
-
+    st.title("Dibujos almacenados en la base de datos")
     # Recorrer el DataFrame y mostrar los dibujos
     etiqueta = st.number_input('¿Qué valores de etiqueta quiere verificar?:', 0, 9)
     for index, row in df.iterrows():
