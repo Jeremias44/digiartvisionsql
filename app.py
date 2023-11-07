@@ -25,7 +25,7 @@ st.sidebar.title("Navegar Páginas")
 seleccion = st.sidebar.selectbox("Ir a la página:", ("Página Principal", "Ver Dibujos"))
 
 if seleccion == "Página Principal":
-    st.title('Modelo para reconocer números del 0 al 9 📚🚀💡👨‍💻')
+    st.title('Modelo para reconocer dígitos 📚🚀💡👨‍💻')
     st.subheader('Este modelo se encuentra en proceso de entrenamiento 🏋️‍♂️ Podés jugar las veces que quieras y estarás ayudando a entrenarlo! 💪')
     st.write("## Para comenzar dibujá un número del 0 al 9")
 
