@@ -90,9 +90,7 @@ if seleccion == "Ver Dibujos":
     st.sidebar.markdown(f"### Cantidad de Dibujos Registrados en la Base de Datos: {len(df)}")
     next_power_of_10 = 10 ** len(str(len(df)))
     st.sidebar.markdown(f"## Gracias por contribuir a la limpieza y carga adecuada de los datos! 🏅  Lleguemos a los {next_power_of_10} Registros! 😃")
-    st.sidebar.markdown(f"### En esta página podrás contribuir eliminando aquellos dibujos que considerás que fueron cargados con la etiqueta incorrecta, aquellos dibujos que fueron subidos sin información, o aquellos dibujos en los que el ojo humano no puede precisar de qué número se trata")
-    etiqueta = st.sidebar.number_input('Para comenzar, ¿Cuál es el número que deseás verificar?:', 0, 9)
-    limite = st.sidebar.selectbox("¿Cuántos dibujos deseás verificar?", (10,50,'todos'), index=0)
+
 
     st.sidebar.markdown("### Contactá con el autor del sitio")
     st.sidebar.markdown("[Jeremías Pombo en LinkedIn](https://www.linkedin.com/in/jeremiaspombo/)")
