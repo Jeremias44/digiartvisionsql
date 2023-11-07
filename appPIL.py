@@ -112,7 +112,7 @@ if seleccion == "Ver Dibujos":
         st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
 
         if st.button(f"Eliminar Dibujo {row['id']}"):
-            confirm = st.checkbox("¿Está seguro de que desea eliminar el dibujo? Esta acción no tiene retorno")
+            confirm = st.checkbox("¿Confirma que desea eliminar el dibujo? Esta acción no tiene retorno")
             if confirm:
                 cursor = conn.cursor()
                 id_to_delete = row['id']
