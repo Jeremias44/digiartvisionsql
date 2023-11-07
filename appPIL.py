@@ -104,7 +104,7 @@ if seleccion == "Ver Dibujos":
 
     st.subheader("Dibujos almacenados en la base de datos")
     for index, row in df.iterrows():
-        st.write(f"Dibujo {index + 1}:")
+        st.write(f"Dibujo {row['id']}:")
         vector = np.array(row['vector'])
         vector = vector * 255
         vector = vector.reshape(28, 28).astype('uint8')
