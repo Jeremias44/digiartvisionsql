@@ -150,7 +150,7 @@ if seleccion == "Ver Dibujos":
                 delete_query = "DELETE FROM datos WHERE id = %s"
 
                 # Ejecuta la consulta SQL con la cadena del vector
-                cursor.execute(delete_query, (id_to_delete)) #aquí debería poner el id exttraído del df
+                cursor.execute(delete_query, (id_to_delete,)) #aquí debería poner el id exttraído del df
 
                 # Confirma los cambios en la base de datos
                 conn.commit()
