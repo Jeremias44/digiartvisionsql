@@ -143,13 +143,14 @@ if seleccion == "Ver Dibujos":
                 conn = psycopg2.connect(DATABASE_URL)
                 cursor = conn.cursor()
 
-                # Convierte el vector en una cadena JSON
-                vector_str = ",".join(map(str, vector))
+                # Obtener el ID de la fila actual en el DataFrame
+                id_to_delete = row['id']
+
                 # Define la consulta SQL para eliminar el registro por el vector
-                delete_query = "DELETE FROM datos WHERE vector = ARRAY[%s]"
+                delete_query = "DELETE FROM datos WHERE id = %s"
 
                 # Ejecuta la consulta SQL con la cadena del vector
-                cursor.execute(delete_query, (vector_str,))
+                cursor.execute(delete_query, (id_to_delete)) #aquí debería poner el id exttraído del df
 
                 # Confirma los cambios en la base de datos
                 conn.commit()
@@ -159,5 +160,5 @@ if seleccion == "Ver Dibujos":
                 
                 st.write(f"Dibujo {index + 1} eliminado de la base de datos.")
 
-                # Cierra la conexión a la base de datos cuando hayas terminado
+                # Cierra la conexión a la base de datos
                 conn.close()
