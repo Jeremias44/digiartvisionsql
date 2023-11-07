@@ -113,7 +113,7 @@ if seleccion == "Ver Dibujos":
 
     st.title("Dibujos almacenados en la base de datos")
 
-    # Filtra las filas del DataFrame según la etiqueta seleccionada
+   # Filtra las filas del DataFrame según la etiqueta seleccionada
     etiqueta = st.number_input('¿Qué valores de etiqueta quiere verificar?:', 0, 9)
     filtered_df = df[df['etiqueta'] == etiqueta]
 
@@ -124,7 +124,7 @@ if seleccion == "Ver Dibujos":
     for i in range(0, num_images, num_images_per_row):
         st.write(f'## Grupo de Imágenes {i // num_images_per_row + 1}')
         
-        columns = st.beta_columns(num_images_per_row)
+        columns = st.columns(num_images_per_row)
         
         for j in range(num_images_per_row):
             if i + j < num_images:
@@ -137,6 +137,7 @@ if seleccion == "Ver Dibujos":
                 
                 with columns[j]:
                     st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
+
 
 # Cierra la conexión a la base de datos cuando hayas terminado
 conn.close()
