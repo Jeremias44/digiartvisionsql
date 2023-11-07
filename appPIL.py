@@ -113,6 +113,35 @@ if seleccion == "Ver Dibujos":
 
     st.title("Dibujos almacenados en la base de datos")
 
+    # Filtra las filas del DataFrame según la etiqueta seleccionada
+    etiqueta = st.number_input('¿Qué valores de etiqueta quiere verificar?:', 0, 9)
+    filtered_df = df[df['etiqueta'] == etiqueta]
+
+    # Divide la pantalla en grupos de 10 imágenes por fila
+    num_images_per_row = 10
+    num_images = len(filtered_df)
+
+    for i in range(0, num_images, num_images_per_row):
+        st.write(f'## Grupo de Imágenes {i // num_images_per_row + 1}')
+        
+        columns = st.beta_columns(num_images_per_row)
+        
+        for j in range(num_images_per_row):
+            if i + j < num_images:
+                row = filtered_df.iloc[i + j]
+                
+                vector = np.array(row['vector'])
+                vector = vector * 255
+                vector = vector.reshape(28, 28).astype('uint8')
+                image = Image.fromarray(vector)
+                
+                with columns[j]:
+                    st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
+
+# Cierra la conexión a la base de datos cuando hayas terminado
+conn.close()
+
+""" 
     # Recorrer el DataFrame y mostrar los dibujos
     etiqueta = st.number_input('¿Qué valores de etiqueta quiere verificar?:', 0, 9)
     for index, row in df.iterrows():
@@ -133,6 +162,4 @@ if seleccion == "Ver Dibujos":
             
             # Mostrar la imagen en Streamlit
             st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
-
-# Cierra la conexión a la base de datos cuando hayas terminado
-conn.close()
+"""
