@@ -123,36 +123,19 @@ if seleccion == "Ver Dibujos":
 
 
     st.subheader("Dibujos almacenados en la base de datos")
-    
-
     for index, row in df.iterrows():
-        if row['etiqueta'] == etiqueta:
-            contador += 1
-            st.write(f"Dibujo {index + 1}:")            
-            # Obtener el arreglo de vectores de la columna "vector"
-            vector = np.array(row['vector'])           
-            # Deshacer la normalización (multiplicar por 255)
-            vector = vector * 255            
-            # Cambiar la forma del arreglo a 28x28 píxeles
-            vector = vector.reshape(28, 28).astype('uint8')   
-            # Crear una imagen a partir del arreglo
-            image = Image.fromarray(vector)
-            # Mostrar la imagen en Streamlit
-            st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
+        st.write(f"Dibujo {index + 1}:")
+        vector = np.array(row['vector'])
+        vector = vector * 255
+        vector = vector.reshape(28, 28).astype('uint8')
+        image = Image.fromarray(vector)
+        st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
 
-            # Agregar una opción para eliminar el dibujo
-            if st.button(f"Eliminar Dibujo {index + 1}"):
-                # Conectarse nuevamente a la base de datos
-                conn = psycopg2.connect(DATABASE_URL)
-                cursor = conn.cursor()
-                # Obtener el ID de la fila actual en el DataFrame
-                id_to_delete = row['id']
-                # Definir la consulta SQL para eliminar el registro por el vector
-                delete_query = "DELETE FROM datos WHERE id = %s"
-                # Ejecutar la consulta SQL con la cadena del vector
-                cursor.execute(delete_query, (id_to_delete,)) #aquí debería poner el id exttraído del df
-                # Confirmar los cambios en la base de datos
-                conn.commit()
-                # Cerrar el cursor y la conexión
-                cursor.close()
-                st.write(f"Dibujo {index + 1} eliminado de la base de datos.")
+        if st.button(f"Eliminar Dibujo {index + 1}"):
+            cursor = conn.cursor()
+            id_to_delete = row['id']
+            delete_query = "DELETE FROM datos WHERE id = %s"
+            cursor.execute(delete_query, (id_to_delete,))
+            conn.commit()
+            cursor.close()
+            st.write(f"Dibujo {index + 1} eliminado de la base de datos.")
