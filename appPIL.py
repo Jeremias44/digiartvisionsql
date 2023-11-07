@@ -8,7 +8,6 @@ from streamlit_drawable_canvas import st_canvas
 import psycopg2
 import os
 from dotenv import load_dotenv
-import json
 
 # Se obtiene la URL de la base de datos desde las variables de entorno
 load_dotenv()
@@ -106,8 +105,6 @@ if seleccion == "Inicio":
         save_data(vector, etiqueta)
     
 if seleccion == "Ver Dibujos":
-    conn = psycopg2.connect(DATABASE_URL)
-    # Definir la consulta SQL para seleccionar todos los datos de la tabla "datos"
     query = "SELECT * FROM datos"
     # Utilizar pandas para ejecutar la consulta y cargar los resultados en un DataFrame
     df = pd.read_sql_query(query, conn)
@@ -152,5 +149,3 @@ if seleccion == "Ver Dibujos":
                     # Cerrar el cursor y la conexión
                     cursor.close()
                     st.write(f"Dibujo {index + 1} eliminado de la base de datos.")
-                    # Cerrar la conexión a la base de datos
-                    conn.close()
