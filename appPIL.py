@@ -20,9 +20,6 @@ def main():
     st.subheader('Este modelo se encuentra en proceso de entrenamiento 🏋️‍♂️ Podés jugar las veces que quieras y estarás ayudando a entrenarlo! 💪')
     st.write("## Para comenzar dibujá un número del 0 al 9")
 
-    st.sidebar.title("Navegación")
-    if st.sidebar.button("Nueva Página"):
-        new_page()
     background_color = st.sidebar.selectbox("Color del fondo", ("black","blue"), index=0)
     stroke_width = st.sidebar.selectbox("Ancho del trazo", (20,30,40), index=1)
     # Se obtiene la ruta absoluta del directorio actual y luego de la imagen
