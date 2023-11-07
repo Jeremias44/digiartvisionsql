@@ -110,14 +110,13 @@ if seleccion == "Ver Dibujos":
     query = "SELECT * FROM datos"
     # Utilizar pandas para ejecutar la consulta y cargar los resultados en un DataFrame
     df = pd.read_sql_query(query, conn)
-    st.sidebar.markdown("### Cantidad de Dibujos Registrados en la Base de Datos:")
-    st.sidebar.markdown(f"# {len(df)}")
-    next_power_of_10 = 10 ** (len(str(len(df))) - 1)
+    st.sidebar.markdown(f"### Cantidad de Dibujos Registrados en la Base de Datos: {len(df)}")
+    next_power_of_10 = 10 ** len(str(len(df)))
     st.sidebar.markdown(f"# Lleguemos a los {next_power_of_10} Registros!")
 
     st.title("Dibujos almacenados en la base de datos")
     # Recorrer el DataFrame y mostrar los dibujos
-    etiqueta = st.number_input('¿Qué valores de etiqueta quiere verificar?:', 0, 9)
+    etiqueta = st.number_input('¿Qué valores de etiqueta deseás verificar?:', 0, 9)
     for index, row in df.iterrows():
         if row['etiqueta'] == etiqueta:
             st.write(f"Dibujo {index + 1}:")
@@ -136,6 +135,26 @@ if seleccion == "Ver Dibujos":
             
             # Mostrar la imagen en Streamlit
             st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
+
+            # Agregar una opción para eliminar el dibujo
+            if st.button(f"Eliminar Dibujo {index + 1}"):
+                # Conectarse nuevamente a la base de datos
+                conn = psycopg2.connect(DATABASE_URL)
+                cursor = conn.cursor()
+
+                # Definir la consulta SQL para eliminar el registro por el vector
+                delete_query = "DELETE FROM datos WHERE vector = %s"
+
+                # Ejecutar la consulta SQL con el vector específico
+                cursor.execute(delete_query, (vector.tolist(),))
+
+                # Confirmar los cambios en la base de datos
+                conn.commit()
+
+                # Cerrar el cursor y la conexión
+                cursor.close()
+                
+                st.write(f"Dibujo {index + 1} eliminado de la base de datos.")
 
 # Cierra la conexión a la base de datos cuando hayas terminado
 conn.close()
