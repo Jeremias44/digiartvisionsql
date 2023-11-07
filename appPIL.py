@@ -7,15 +7,30 @@ from streamlit_drawable_canvas import st_canvas
 import psycopg2
 import os
 from dotenv import load_dotenv
-from utils import save_data
 
-def main():
-    # Se obtiene la URL de la base de datos desde las variables de entorno
-    load_dotenv()
-    DATABASE_URL = os.getenv("DATABASE_URL")
-    # Se establece una conexión a la base de datos
-    conn = psycopg2.connect(DATABASE_URL)
+# Se obtiene la URL de la base de datos desde las variables de entorno
+load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL")
+# Se establece una conexión a la base de datos
+conn = psycopg2.connect(DATABASE_URL)
 
+def save_data(vector, label):
+    # Se abre un cursor para interactuar con la base de datos
+    cursor = conn.cursor()
+    # Se define la consulta de actualización SQL para asignar la calificación
+    insert_query = "INSERT INTO datos (vector, etiqueta) VALUES (ARRAY[%s], %s)"
+    # Se crea una tupla con los datos a actualizar en la consulta
+    data = (vector, label)
+    # Se ejecuta la consulta de actualización con los datos proporcionados
+    cursor.execute(insert_query, data)
+    # Se confirma los cambios en la base de datos
+    conn.commit()
+    # Se cierra el cursor
+    cursor.close()
+
+seleccion = st.sidebar.selectbox("Inicio", "Ver Dibujos")
+
+if seleccion == "Inicio":
     st.title('Modelo para reconocer números del 0 al 9 📚🚀💡👨‍💻')
     st.subheader('Este modelo se encuentra en proceso de entrenamiento 🏋️‍♂️ Podés jugar las veces que quieras y estarás ayudando a entrenarlo! 💪')
     st.write("## Para comenzar dibujá un número del 0 al 9")
@@ -86,6 +101,6 @@ def main():
         st.write("## ¡Excelente trabajo! 🏅")
         st.write('Si hacés click en la papelera podés dibujar nuevamente y seguir entrenando el modelo 😃')
         save_data(vector, label)
-
-if __name__ == '__main__':
-    main()
+    
+if seleccion == "Ver Dibujos":
+    
