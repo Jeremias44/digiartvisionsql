@@ -138,17 +138,20 @@ if seleccion == "Ver Dibujos":
 
             # Agregar una opción para eliminar el dibujo
             if st.button(f"Eliminar Dibujo {index + 1}"):
+                # Convierte el vector a una cadena de texto
+                vector_str = str(vector.tolist())
+
                 # Conectarse nuevamente a la base de datos
                 conn = psycopg2.connect(DATABASE_URL)
                 cursor = conn.cursor()
 
-                # Definir la consulta SQL para eliminar el registro por el vector
+                # Define la consulta SQL para eliminar el registro por el vector
                 delete_query = "DELETE FROM datos WHERE vector = %s"
 
-                # Ejecutar la consulta SQL con el vector específico
-                cursor.execute(delete_query, (vector.tolist(),))
+                # Ejecuta la consulta SQL con la cadena del vector
+                cursor.execute(delete_query, (vector_str,))
 
-                # Confirmar los cambios en la base de datos
+                # Confirma los cambios en la base de datos
                 conn.commit()
 
                 # Cerrar el cursor y la conexión
