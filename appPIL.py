@@ -121,7 +121,6 @@ if seleccion == "Ver Dibujos":
     contador = 0
     limite = 10
     for index, row in df.iterrows():
-        
         while contador < limite:
             if row['etiqueta'] == etiqueta:
                 contador += 1
