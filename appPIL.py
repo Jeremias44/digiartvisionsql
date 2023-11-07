@@ -111,11 +111,11 @@ if seleccion == "Ver Dibujos":
         image = Image.fromarray(vector)
         st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
 
-        if st.button(f"Eliminar Dibujo {index + 1}"):
+        if st.button(f"Eliminar Dibujo {row['id']}"):
             cursor = conn.cursor()
             id_to_delete = row['id']
             delete_query = "DELETE FROM datos WHERE id = %s"
             cursor.execute(delete_query, (id_to_delete,))
             conn.commit()
             cursor.close()
-            st.write(f"Dibujo {index + 1} eliminado de la base de datos.")
+            st.write(f"Dibujo {row['id']} eliminado de la base de datos.")
