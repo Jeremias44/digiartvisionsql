@@ -8,6 +8,7 @@ from streamlit_drawable_canvas import st_canvas
 import psycopg2
 import os
 from dotenv import load_dotenv
+import json
 
 # Se obtiene la URL de la base de datos desde las variables de entorno
 load_dotenv()
