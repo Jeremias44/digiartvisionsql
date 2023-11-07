@@ -2,6 +2,7 @@ import streamlit as st
 from tensorflow import keras
 from keras.models import load_model
 from PIL import Image
+import pandas as pd
 import numpy as np
 from streamlit_drawable_canvas import st_canvas
 import psycopg2
@@ -14,13 +15,13 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 # Se establece una conexión a la base de datos
 conn = psycopg2.connect(DATABASE_URL)
 
-def save_data(vector, label):
+def save_data(vector, etiqueta):
     # Se abre un cursor para interactuar con la base de datos
     cursor = conn.cursor()
     # Se define la consulta de actualización SQL para asignar la calificación
     insert_query = "INSERT INTO datos (vector, etiqueta) VALUES (ARRAY[%s], %s)"
     # Se crea una tupla con los datos a actualizar en la consulta
-    data = (vector, label)
+    data = (vector, etiqueta)
     # Se ejecuta la consulta de actualización con los datos proporcionados
     cursor.execute(insert_query, data)
     # Se confirma los cambios en la base de datos
@@ -91,7 +92,7 @@ if seleccion == "Inicio":
         input_image_flat = input_image_flat.astype(np.float32)
 
         # Se crea la variable label, es un integer con la etiqueta predicha
-        label = st.number_input("Verificá que la etiqueta sea la correcta antes de guardarla. En caso de que sea incorrecta, por favor corregila (0,9):", 0, 9, predicted_number)
+        etiqueta = st.number_input("Verificá que la etiqueta sea la correcta antes de guardarla. En caso de que sea incorrecta, por favor corregila (0,9):", 0, 9, predicted_number)
         # Se crea la variable vector, que tiene el arreglo de vectores dentro de una lista    
         vector = input_image_flat.tolist()
 
@@ -100,7 +101,11 @@ if seleccion == "Inicio":
         st.write('Gracias por ayudar a reentrenar el modelo')
         st.write("## ¡Excelente trabajo! 🏅")
         st.write('Si hacés click en la papelera podés dibujar nuevamente y seguir entrenando el modelo 😃')
-        save_data(vector, label)
+        save_data(vector, etiqueta)
     
 if seleccion == "Ver Dibujos":
-    
+    # Definir la consulta SQL para seleccionar todos los datos de la tabla "datos"
+    query = "SELECT * FROM datos"
+    # Utilizar pandas para ejecutar la consulta y cargar los resultados en un DataFrame
+    df = pd.read_sql_query(query, conn)
+    st.write(len(df))
