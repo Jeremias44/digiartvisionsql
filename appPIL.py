@@ -97,9 +97,10 @@ if seleccion == "Ver Dibujos":
     st.sidebar.markdown("### Visitá el repositorio del proyecto")
     st.sidebar.markdown("[Repositorio de GitHub](https://github.com/Jeremias44/digiartvisionsql)")
 
+    df = df.iloc[::-1].reset_index(drop=True)
     df = df[df['etiqueta'] == etiqueta ]
     if limite != 'todos':
-        df = df.tail(limite)
+        df = df.head(limite)
 
     st.subheader("Dibujos almacenados en la base de datos")
     for index, row in df.iterrows():
