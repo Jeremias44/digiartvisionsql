@@ -105,6 +105,7 @@ if seleccion == "Inicio":
         save_data(vector, etiqueta)
     
 if seleccion == "Ver Dibujos":
+    conn = psycopg2.connect(DATABASE_URL)
     # Definir la consulta SQL para seleccionar todos los datos de la tabla "datos"
     query = "SELECT * FROM datos"
     # Utilizar pandas para ejecutar la consulta y cargar los resultados en un DataFrame
@@ -113,14 +114,24 @@ if seleccion == "Ver Dibujos":
     st.title("Dibujos almacenados en la base de datos")
 
     # Recorrer el DataFrame y mostrar los dibujos
+    # Recorrer el DataFrame y mostrar los dibujos
     for index, row in df.iterrows():
         st.write(f"Dibujo {index + 1}:")
         
         # Obtener el arreglo de vectores de la columna "vector"
         vector = np.array(row['vector'])
         
-        # Crear una imagen a partir del arreglo de vectores
-        image = Image.fromarray(vector.reshape(28, 28).astype('uint8'))
+        # Deshacer la normalización (multiplicar por 255)
+        vector = vector * 255
+        
+        # Cambiar la forma del arreglo a 28x28 píxeles
+        vector = vector.reshape(28, 28).astype('uint8')
+        
+        # Crear una imagen a partir del arreglo
+        image = Image.fromarray(vector)
         
         # Mostrar la imagen en Streamlit
         st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
+
+# Cierra la conexión a la base de datos cuando hayas terminado
+conn.close()
