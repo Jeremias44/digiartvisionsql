@@ -10,7 +10,7 @@ st.info("También podés acceder a la sección Verificar Dibujos 📝, en la que
 st.info("Además, inauguramos la nueva sección Evaluar Modelos 🤖, en la que podrás observar la precisión de las predicciones de los modelos, entre otras métricas.")
 
 imagen = Image.open('media/portada.png')
-st.sidebar.image(imagen, caption='', use_column_width=True)
+st.image(imagen, caption='', use_column_width=True)
 
 st.sidebar.markdown("### Contactá con el autor del sitio")
 st.sidebar.markdown("[Jeremías Pombo en LinkedIn](https://www.linkedin.com/in/jeremiaspombo/)")
