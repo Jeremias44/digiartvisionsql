@@ -23,7 +23,7 @@ df = pd.read_sql_query(query, conn)
 conn.close()
 
 
-Definir una función para convertir la lista anidada en un numpy.ndarray
+# Definir una función para convertir la lista anidada en un numpy.ndarray
 def parse_vector(vector_list):
     return np.array(vector_list).reshape(28, 28).astype(np.float32)
 
