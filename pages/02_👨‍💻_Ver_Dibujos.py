@@ -21,7 +21,7 @@ etiqueta = st.sidebar.number_input('Para comenzar, ¿Cuál es el número que des
 limite = st.sidebar.selectbox("¿Cuántos dibujos deseás verificar?", (10,50,500,'todos'), index=3)
 st.sidebar.markdown(f"### Cantidad de Dibujos Registrados en la Base de Datos: {len(df)}")
 next_power_of_10 = 10 ** len(str(len(df)))
-st.sidebar.markdown(f"## Gracias por contribuir a la limpieza y carga adecuada de los datos! 🏅  Lleguemos a los {next_power_of_10} Registros! 😃")
+st.sidebar.markdown(f"## Gracias por contribuir a la limpieza y carga adecuada de los datos! 🏅  ¡¿Nos ayudás con el desafío de alcanzar los {next_power_of_10} registros?! 😃")
 
 
 st.sidebar.markdown("### Contactá con el autor del sitio")
@@ -43,14 +43,11 @@ for index, row in df.iterrows():
     image = Image.fromarray(vector)
     st.image(image, caption=f"Etiqueta: {row['etiqueta']}", width=140)
 
-    if st.checkbox(f"Eliminar Dibujo {row['id']}"):
-        if st.button("Confirmar eliminación"):
-            cursor = conn.cursor()
-            id_to_delete = row['id']
-            delete_query = "DELETE FROM datos WHERE id = %s"
-            cursor.execute(delete_query, (id_to_delete,))
-            conn.commit()
-            cursor.close()
-            st.write(f"Dibujo {row['id']} eliminado de la base de datos.")
-        elif st.button("Cancelar"):
-            st.write("Eliminación cancelada")
+    if st.button(f"Eliminar Dibujo {row['id']}"):
+        cursor = conn.cursor()
+        id_to_delete = row['id']
+        delete_query = "DELETE FROM datos WHERE id = %s"
+        cursor.execute(delete_query, (id_to_delete,))
+        conn.commit()
+        cursor.close()
+        st.write(f"Dibujo {row['id']} eliminado de la base de datos.")

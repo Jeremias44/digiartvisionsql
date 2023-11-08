@@ -21,7 +21,7 @@ def save_data(vector, etiqueta):
     conn.commit()
     cursor.close()
 
-st.title('Modelo para reconocer dígitos 📚🚀💡👨‍💻')
+st.title('Modelo para reconocer números del 0 al 9 📚🚀💡👨‍💻')
 st.subheader('Este modelo se encuentra en proceso de entrenamiento 🏋️‍♂️ Podés jugar las veces que quieras y estarás ayudando a entrenarlo! 💪')
 st.write("## Para comenzar dibujá un número del 0 al 9")
 
