@@ -8,10 +8,13 @@ from streamlit_drawable_canvas import st_canvas
 import psycopg2
 import os
 from dotenv import load_dotenv
-from sklearn.metrics import f1_score, accuracy_score, recall_score, confusion_matrix
+#from sklearn.metrics import f1_score, accuracy_score, recall_score, confusion_matrix
 import matplotlib.pyplot as plt
 import seaborn as sns
 
+
+st.titile(" 🚧 Sección en Etapa de Desarrollo 🚧 ")
+""" 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 conn = psycopg2.connect(DATABASE_URL)
@@ -49,3 +52,4 @@ plt.xlabel('Etiquetas Predichas')
 plt.ylabel('Etiquetas Correctas')
 plt.title('Matriz de Confusión retrained_model (Porcentajes)')
 st.pyplot(plt)
+"""

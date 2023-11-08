@@ -3,4 +3,5 @@ streamlit
 tensorflow
 streamlit-drawable-canvas
 psycopg2-binary
+sklearn
 
