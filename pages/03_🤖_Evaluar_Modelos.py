@@ -13,7 +13,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-st.title(" 🚧 Sección en Desarrollo 🚧 ")
+st.title("🤖 Evaluación de Modelos 🤖")
+
+st.info("En la siguiente matriz podrás ver la efectividad y precisión del modelo elegido:")
+st.markdown("La línea diagonal que va de arriba hacia abajo y de izquierda a derecha corresponde a las etiquetas correctamente predichas por el modelo")
+st.markdown("Por ejemplo, si observamos la fila 0, columna 0, podemos ver el porcentaje de veces que el modelo acertó la etiqueta 0 en los casos en los que el número era 0")
+st.markdown("Por ejemplo, si recorremos esa fila de manera horizontal, podemos ver el porcentaje de veces que el modelo predijo un número distinto de 0 cuando el dibujo era un 0")
+st.markdown("Del mismo modo se puede seguir recorriendo la matriz para visualizar las predicciones, los aciertos y los errores en cada uno de los números")
 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -50,5 +56,5 @@ plt.figure(figsize=(8, 6))
 sns.heatmap(confusion_percentages, annot=True, fmt='.1%', cmap='Blues', xticklabels=class_names, yticklabels=class_names)
 plt.xlabel('Etiquetas Predichas')
 plt.ylabel('Etiquetas Correctas')
-plt.title('Matriz de Confusión retrained_model (Porcentajes)')
+plt.title(f'Matriz de Confusión {model} (Porcentajes)')
 st.pyplot(plt)
