@@ -56,3 +56,8 @@ st.info(f"Si observamos la fila 0, columna 0, vemos el porcentaje de veces que e
 st.info(f"Si recorremos la fila 0, podemos ver el porcentaje de veces que el modelo predijo un número distinto de 0 cuando el dibujo era un 0. ({round(confusion_percentages[0,1:10].sum()*100, 2)}%)")
 st.info(f"Si recorremos la columna 0, haciendo cálculos auxiliares podemos obtener el porcentaje de veces que el modelo predijo 0 cuando el dibujo era distinto de 0. ({round((confusion_percentages[1:10,0].sum()*100) * (100/(confusion_percentages[0,0]*100)), 2)}%)")
 st.markdown("Del mismo modo se puede seguir recorriendo la matriz para visualizar las predicciones, los aciertos y los errores en cada una de las filas correspondientes a cada etiqueta")
+
+st.sidebar.markdown("### Contactá con el autor del sitio")
+st.sidebar.markdown("[Jeremías Pombo en LinkedIn](https://www.linkedin.com/in/jeremiaspombo/)")
+st.sidebar.markdown("### Visitá el repositorio del proyecto")
+st.sidebar.markdown("[Repositorio de GitHub](https://github.com/Jeremias44/digiartvisionsql)")
