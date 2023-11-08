@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-st.titile(" 🚧 Sección en Etapa de Desarrollo 🚧 ")
+st.title(" 🚧 Sección en Etapa de Desarrollo 🚧 ")
 """ 
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
