@@ -2,3 +2,5 @@
 venvSQL/
 # Variables de Entorno
 .env
+# Copia de app
+appCopia.py
