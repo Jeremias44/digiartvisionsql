@@ -4,8 +4,9 @@ st.title('👁️ DIGI ART VISION 👁️')
 
 st.info("## Te damos la bienvenida a DigiArtVision, una app de interacción con modelos de computer vision 🤖")
 
-st.markdown("Desde el menú lateral podrás acceder a la sección principal donde podrás dibujar ✏️, ver predicciones 🚀💡 y alimentar la base de datos 👨‍💻. También podrás acceder a la sección Verificar Dibujos 📝, en la que podrás contribuir 🏅 evaluando los últimos dibujos subidos a la aplicación")
-
+st.markdown("Desde el menú lateral se accede a la sección principal donde podrás dibujar ✏️, ver predicciones 🚀💡 y alimentar la base de datos 👨‍💻.")
+st.markdown("También podés acceder a la sección Verificar Dibujos 📝, en la que podrás contribuir 🏅 evaluando los últimos dibujos subidos a la aplicación.")
+st.markdown("Además, inauguramos la nueva sección Evaluar Modelos 🤖, en la que podrás observar la precisión de las predicciones de los modelos, entre otras métricas.")
 
 st.sidebar.markdown("### Contactá con el autor del sitio")
 st.sidebar.markdown("[Jeremías Pombo en LinkedIn](https://www.linkedin.com/in/jeremiaspombo/)")
