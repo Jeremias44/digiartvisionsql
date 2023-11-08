@@ -46,8 +46,17 @@ for index, row in df.iterrows():
     if st.button(f"Eliminar Dibujo {row['id']}"):
         cursor = conn.cursor()
         id_to_delete = row['id']
-        delete_query = "DELETE FROM datos WHERE id = %s"
-        cursor.execute(delete_query, (id_to_delete,))
-        conn.commit()
-        cursor.close()
-        st.write(f"Dibujo {row['id']} eliminado de la base de datos.")
+
+        if row['contador'] < 2:
+            row['contador'] += 1
+            set_contador = "UPDATE datos SET contador = contador + 1 WHERE id = %s"
+            cursor.execute(set_contador, (id_to_delete,))
+            conn.commit()
+            cursor.close()    
+            st.write(f"Dibujo {row['id']} en evaluación para su eliminación.")
+        else:
+            delete_query = "DELETE FROM datos WHERE id = %s"
+            cursor.execute(delete_query, (id_to_delete,))
+            conn.commit()
+            cursor.close()
+            st.write(f"Dibujo {row['id']} eliminado de la base de datos.")
