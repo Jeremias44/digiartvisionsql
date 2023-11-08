@@ -2,7 +2,7 @@ import streamlit as st
 
 st.title('DIGI ART VISION')
 
-st.info("## Te damos la bienvenida a DigiArtVision, la app de interacción con modelos de computer vision en la que podés contribuir con nuevos dibujos y con evaluación de dibujos realizados por otros usuarios")
+st.info("## Te damos la bienvenida a DigiArtVision, una app de interacción con modelos de computer vision")
 
 st.markdown("Desde el menú lateral podrás acceder a la sección principal donde podrás dibujar, ver predicciones y alimentar la base de datos. También podrás acceder a la sección Verificar Dibujos, en la que podrás contribuir evaluando los últimos dibujos subidos a la aplicación")
 
