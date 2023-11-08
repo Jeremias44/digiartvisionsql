@@ -12,22 +12,12 @@ from sklearn.metrics import f1_score, accuracy_score, recall_score, confusion_ma
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-
-st.title("🤖 Evaluación de Modelos 🤖")
-
-st.info("En la siguiente matriz podrás ver la efectividad y precisión del modelo elegido:")
-st.markdown("La línea diagonal que va de arriba hacia abajo y de izquierda a derecha corresponde a las etiquetas correctamente predichas por el modelo")
-st.markdown("Por ejemplo, si observamos la fila 0, columna 0, podemos ver el porcentaje de veces que el modelo acertó la etiqueta 0 en los casos en los que el número era 0")
-st.markdown("Por ejemplo, si recorremos esa fila de manera horizontal, podemos ver el porcentaje de veces que el modelo predijo un número distinto de 0 cuando el dibujo era un 0")
-st.markdown("Del mismo modo se puede seguir recorriendo la matriz para visualizar las predicciones, los aciertos y los errores en cada uno de los números")
-
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 conn = psycopg2.connect(DATABASE_URL)
 query = "SELECT * FROM datos"
 df = pd.read_sql_query(query, conn)
 conn.close()
-
 
 # Definir una función para convertir la lista anidada en un numpy.ndarray
 def parse_vector(vector_list):
@@ -44,13 +34,22 @@ st.sidebar.image(imagen, caption='', use_column_width=True)
 model = st.sidebar.selectbox("Modelo a Evaluar", ("model_retrained.h5","model_mnist.h5","model_mix.h5"), index=0)
 loaded_model = load_model(model)
 
-
 predictions = loaded_model.predict(train_vectors)
 predicted_labels = np.argmax(predictions, axis=1)
 confusion = confusion_matrix(labels, predicted_labels)
 class_totals = confusion.sum(axis=1, keepdims=True)
 confusion_percentages = confusion / class_totals
 class_names = [str(i) for i in range(10)]
+
+st.title("🤖 Evaluación de Modelos 🤖")
+
+st.info("En la siguiente matriz podrás ver la efectividad y precisión del modelo elegido:")
+st.markdown("La línea diagonal que va de arriba hacia abajo y de izquierda a derecha corresponde a las etiquetas correctamente predichas por el modelo")
+st.markdown("### Por ejemplo:")
+st.markdown(f"### Si observamos la fila 0, columna 0, emos el porcentaje de veces que el modelo acertó correctamente la etiqueta 0. ({round(confusion_percentages[0,0]*100, 2)}%)")
+st.markdown(f"### Si recorremos la fila 0, podemos ver el porcentaje de veces que el modelo predijo un número distinto de 0 cuando el dibujo era un 0. ({round(confusion_percentages[0,1:10].sum()*100, 2)}%)")
+st.markdown(f"### Si recorremos la columna 0, haciendo cálculos auxiliares podemos obtener el porcentaje de veces que el modelo predijo 0 cuando el dibujo era distinto de 0. ({round((confusion_percentages[1:10,0].sum()*100) * (100/(confusion_percentages[0,0]*100)), 2)}%)")
+st.markdown("Del mismo modo se puede seguir recorriendo la matriz para visualizar las predicciones, los aciertos y los errores en cada una de las filas correspondientes a un número distinto")
 
 plt.figure(figsize=(8, 6))
 sns.heatmap(confusion_percentages, annot=True, fmt='.1%', cmap='Blues', xticklabels=class_names, yticklabels=class_names)
