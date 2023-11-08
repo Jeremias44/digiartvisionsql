@@ -43,12 +43,12 @@ class_names = [str(i) for i in range(10)]
 
 st.title("🤖 Evaluación de Modelos 🤖")
 
-st.info("En la siguiente matriz podrás ver la efectividad y precisión del modelo elegido:")
+st.info("En la siguiente matriz podrás ver la efectividad y precisión del modelo elegido")
 st.markdown("La línea diagonal que va de arriba hacia abajo y de izquierda a derecha corresponde a las etiquetas correctamente predichas por el modelo")
-st.markdown("### Por ejemplo:")
-st.markdown(f"### Si observamos la fila 0, columna 0, emos el porcentaje de veces que el modelo acertó correctamente la etiqueta 0. ({round(confusion_percentages[0,0]*100, 2)}%)")
-st.markdown(f"### Si recorremos la fila 0, podemos ver el porcentaje de veces que el modelo predijo un número distinto de 0 cuando el dibujo era un 0. ({round(confusion_percentages[0,1:10].sum()*100, 2)}%)")
-st.markdown(f"### Si recorremos la columna 0, haciendo cálculos auxiliares podemos obtener el porcentaje de veces que el modelo predijo 0 cuando el dibujo era distinto de 0. ({round((confusion_percentages[1:10,0].sum()*100) * (100/(confusion_percentages[0,0]*100)), 2)}%)")
+st.markdown("Por ejemplo:")
+st.info(f"Si observamos la fila 0, columna 0, emos el porcentaje de veces que el modelo acertó correctamente la etiqueta 0. ({round(confusion_percentages[0,0]*100, 2)}%)")
+st.info(f"Si recorremos la fila 0, podemos ver el porcentaje de veces que el modelo predijo un número distinto de 0 cuando el dibujo era un 0. ({round(confusion_percentages[0,1:10].sum()*100, 2)}%)")
+st.info(f"Si recorremos la columna 0, haciendo cálculos auxiliares podemos obtener el porcentaje de veces que el modelo predijo 0 cuando el dibujo era distinto de 0. ({round((confusion_percentages[1:10,0].sum()*100) * (100/(confusion_percentages[0,0]*100)), 2)}%)")
 st.markdown("Del mismo modo se puede seguir recorriendo la matriz para visualizar las predicciones, los aciertos y los errores en cada una de las filas correspondientes a un número distinto")
 
 plt.figure(figsize=(8, 6))
