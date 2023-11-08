@@ -28,9 +28,9 @@ st.write("## Para comenzar dibujá un número del 0 al 9")
 background_color = st.sidebar.selectbox("Color del fondo", ("black","blue"), index=0)
 stroke_width = st.sidebar.selectbox("Ancho del trazo", (20,30,40), index=1)
 
-current_directory = os.path.dirname(__file__)
-image_path = os.path.join(current_directory, 'media', 'modelos2.png')
-imagen = Image.open(image_path)
+#current_directory = os.path.dirname(__file__)
+#image_path = os.path.join(current_directory, 'media', 'modelos2.png')
+#imagen = Image.open(image_path)
 st.sidebar.image(imagen, caption='', use_column_width=True)
 model = st.sidebar.selectbox("Modelo a Utilizar", ("model_retrained.h5","model_mnist.h5","model_mix.h5"), index=0)
 
