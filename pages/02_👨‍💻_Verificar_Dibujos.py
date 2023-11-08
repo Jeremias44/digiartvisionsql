@@ -20,9 +20,9 @@ st.sidebar.info(f"### En esta sección podrás contribuir eliminando aquellos di
 etiqueta = st.sidebar.number_input('Para comenzar, ¿Cuál es el número que deseás verificar?:', 0, 9)
 limite = st.sidebar.selectbox("¿Cuántos dibujos deseás verificar?", (10,50,500,'todos'), index=3)
 st.sidebar.info(f"### Gracias por contribuir a la limpieza y carga adecuada de los datos! 🏅")
-st.sidebar.markdown(f"### Dibujos Registrados en la Base de Datos: {len(df)}")
+st.sidebar.markdown(f"Dibujos Registrados en la Base de Datos: {len(df)}")
 next_power_of_10 = 10 ** len(str(len(df)))
-st.sidebar.markdown(f"## Te animás a contribuir al desafío de alcanzar los {next_power_of_10} registros?! 😃")
+st.sidebar.markdown(f"### Te animás a contribuir al desafío de alcanzar los {next_power_of_10} registros?! 😃")
 
 st.sidebar.markdown("### Contactá con el autor del sitio")
 st.sidebar.markdown("[Jeremías Pombo en LinkedIn](https://www.linkedin.com/in/jeremiaspombo/)")
