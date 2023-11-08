@@ -30,7 +30,7 @@ stroke_width = st.sidebar.selectbox("Ancho del trazo", (20,30,40), index=1)
 
 #current_directory = os.path.dirname(__file__)
 #image_path = os.path.join(current_directory, 'media', 'modelos2.png')
-imagen = Image.open('modelos2.png')
+imagen = Image.open('media/modelos2.png')
 st.sidebar.image(imagen, caption='', use_column_width=True)
 model = st.sidebar.selectbox("Modelo a Utilizar", ("model_retrained.h5","model_mnist.h5","model_mix.h5"), index=0)
 
