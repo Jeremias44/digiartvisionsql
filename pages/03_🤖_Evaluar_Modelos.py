@@ -8,9 +8,9 @@ from streamlit_drawable_canvas import st_canvas
 import psycopg2
 import os
 from dotenv import load_dotenv
-#from sklearn.metrics import f1_score, accuracy_score, recall_score, confusion_matrix
-#import matplotlib.pyplot as plt
-#import seaborn as sns
+from sklearn.metrics import f1_score, accuracy_score, recall_score, confusion_matrix
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 
 st.title(" 🚧 Sección en Desarrollo 🚧 ")
