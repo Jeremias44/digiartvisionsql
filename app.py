@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.info('# 👁️ DIGI ART VISION 👁️')
+st.info('# 👁️👁️ DIGI ART VISION 👁️👁️')
 
 st.markdown("## Te damos la bienvenida a DigiArtVision, una app de interacción con modelos de computer vision 🤖")
 
