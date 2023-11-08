@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 
 
 st.title(" 🚧 Sección en Desarrollo 🚧 ")
-""" 
+
 load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 conn = psycopg2.connect(DATABASE_URL)
@@ -52,4 +52,3 @@ plt.xlabel('Etiquetas Predichas')
 plt.ylabel('Etiquetas Correctas')
 plt.title('Matriz de Confusión retrained_model (Porcentajes)')
 st.pyplot(plt)
-"""
