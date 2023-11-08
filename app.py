@@ -1,7 +1,7 @@
 import streamlit as st
 from PIL import Image
 
-st.info('#👁️  ---  DIGI ART VISION  ---  👁️')
+st.info('# 👁️  ---  DIGI ART VISION  ---  👁️')
 
 st.markdown("## Te damos la bienvenida a DigiArtVision, una app de interacción con modelos de computer vision 🤖")
 
